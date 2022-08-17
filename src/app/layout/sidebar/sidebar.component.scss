@@ -29,4 +29,10 @@
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
   }
-  
+  mat-sidenav, 
+mat-sidenav.mat-locked-open, 
+mat-sidenav.mat-closed.mat-locked-open-add-active {
+    min-width: 100px !important;
+    width: 85vw !important;
+    max-width: 200px !important;
+} 
