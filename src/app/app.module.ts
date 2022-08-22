@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { RegionComponent } from './layout/region/region.component';
+import { CommuneComponent } from './layout/commune/commune.component';
+import { PrefectureComponent } from './layout/prefecture/prefecture.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
 import { PresentationComponent } from './layout/presentation/presentation.component';
@@ -17,14 +19,19 @@ import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table' ;
 import {MatSortModule} from '@angular/material/sort';
+import { DashboardComponent } from './layout/dashboard/dashboard.component';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
     RegionComponent,
+    CommuneComponent,
+    PrefectureComponent,
     SidebarComponent,
     ContentComponent,
     PresentationComponent,
     MemberComponent,
+    DashboardComponent,
     ],
   imports: [
     BrowserModule,
@@ -38,6 +45,7 @@ import {MatSortModule} from '@angular/material/sort';
     HttpClientModule,
     MatTableModule,
     MatSortModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
