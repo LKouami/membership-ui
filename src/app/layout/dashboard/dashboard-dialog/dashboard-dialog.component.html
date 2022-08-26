@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<form [formGroup]="dashboardForm" >
+<mat-dialog-content class="mat-typography">
+    <div *ngIf="data.isEdit; else elseBlock">
+        <p>
+    <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="lastname"  autocomplete="off" placeholder="Placeholder">
+        <mat-error *ngIf="dashboardForm.controls['lastname'].invalid">{{getLastnameErrorMessage()}}</mat-error>
+      </mat-form-field>
+  </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Prénom</mat-label>
+            <input matInput formControlName="firstname"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="dashboardForm.controls['firstname'].invalid">{{getFirstnameErrorMessage()}}</mat-error>
+        </mat-form-field>
+  <p>
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email"  autocomplete="off" placeholder="Placeholder" required>
+            <mat-error *ngIf="dashboardForm.controls['email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+  </p>
+    </div>
+    <ng-template #elseBlock>Confirmez la suppression</ng-template>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Valider</button>
+</mat-dialog-actions>
+</form>

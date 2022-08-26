@@ -21,6 +21,14 @@ import { MatTableModule } from '@angular/material/table' ;
 import {MatSortModule} from '@angular/material/sort';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule  } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DashboardDialogComponent } from './layout/dashboard/dashboard-dialog/dashboard-dialog.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +40,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     PresentationComponent,
     MemberComponent,
     DashboardComponent,
+    DashboardDialogComponent,
     ],
   imports: [
     BrowserModule,
@@ -46,6 +55,15 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatTableModule,
     MatSortModule,
     MatTabsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
