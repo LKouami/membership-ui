@@ -29,6 +29,7 @@ import { DashboardDialogComponent } from './layout/dashboard/dashboard-dialog/da
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MemberDialogComponent } from './layout/member/member-dialog/member-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MemberComponent,
     DashboardComponent,
     DashboardDialogComponent,
+    MemberDialogComponent
     ],
   imports: [
     BrowserModule,
