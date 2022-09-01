@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import config from 'config';
 @Injectable({
   providedIn: 'root'
 })
 export class RegionsService {
-  private baseUrl = 'https://membershipmanager.azurewebsites.net/api/v1/Regions';
+  private baseUrl = config.baseUrl + 'api/v1/Regions';
 
   constructor(private http: HttpClient) { 
 

@@ -30,11 +30,11 @@
 <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-<button mat-menu-item (click)="openDialog('edit')">
+<button mat-menu-item (click)="openDialog('edit', element)">
   <mat-icon>edit</mat-icon>
   <span>Modifier</span>
 </button>
-<button mat-menu-item (click)="openDialog('delete')">
+<button mat-menu-item (click)="openDialog('delete', element)">
   <mat-icon>delete_forever</mat-icon>
   <span>Supprimer</span>
 </button>

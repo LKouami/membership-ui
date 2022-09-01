@@ -5,23 +5,106 @@
         <p>
     <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
-        <input matInput formControlName="lastname"  autocomplete="off" placeholder="Placeholder">
-        <mat-error *ngIf="memberForm.controls['lastname'].invalid">{{getLastnameErrorMessage()}}</mat-error>
+        <input matInput formControlName="Lastname"  autocomplete="off" placeholder="Placeholder">
+        <mat-error *ngIf="memberForm.controls['Lastname'].invalid">{{getLastnameErrorMessage()}}</mat-error>
       </mat-form-field>
   </p>
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Prénom</mat-label>
-            <input matInput formControlName="firstname"  autocomplete="off" placeholder="Placeholder">
-            <mat-error *ngIf="memberForm.controls['firstname'].invalid">{{getFirstnameErrorMessage()}}</mat-error>
+            <input matInput formControlName="Firstname"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Firstname'].invalid">{{getFirstnameErrorMessage()}}</mat-error>
         </mat-form-field>
   <p>
     <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email"  autocomplete="off" placeholder="Placeholder" required>
-            <mat-error *ngIf="memberForm.controls['email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+        <mat-label>Cni</mat-label>
+        <input matInput formControlName="Cni"  autocomplete="off" placeholder="Placeholder" required>
+            <mat-error *ngIf="memberForm.controls['Cni'].invalid">{{getCniErrorMessage()}}</mat-error>
       </mat-form-field>
   </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Profession</mat-label>
+            <input matInput formControlName="Occupation"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Occupation'].invalid">{{getOccupationErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Commune</mat-label>
+            <input matInput formControlName="CommuneId"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['CommuneId'].invalid">{{getCommuneIdErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Sexe</mat-label>
+            <input matInput formControlName="Gender"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Gender'].invalid">{{getGenderErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Date de naissance</mat-label>
+            <input matInput formControlName="Birthdate"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Birthdate'].invalid">{{getBirthdateErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Lieu de naissance</mat-label>
+            <input matInput formControlName="BirthPlace"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['BirthPlace'].invalid">{{getBirthPlaceErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Quartier</mat-label>
+            <input matInput formControlName="Province"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Province'].invalid">{{getProvinceErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Type de souscription</mat-label>
+            <input matInput formControlName="SubscriptionType"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['SubscriptionType'].invalid">{{getSubscriptionTypeErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Date de souscription</mat-label>
+            <input matInput formControlName="SubscriptionDate"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['SubscriptionDate'].invalid">{{getSubscriptionDateErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Contact</mat-label>
+            <input matInput formControlName="Contact"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['Contact'].invalid">{{getContactErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Numero de membre</mat-label>
+            <input matInput formControlName="MembershipNum"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['MembershipNum'].invalid">{{getMembershipNumErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Num Qr Code</mat-label>
+            <input matInput formControlName="QrCodeRef"  autocomplete="off" placeholder="Placeholder">
+            <mat-error *ngIf="memberForm.controls['QrCodeRef'].invalid">{{getQrCodeRefErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
+
+
+
+
+
+
     </div>
     <ng-template #elseBlock>Confirmez la suppression</ng-template>
   
