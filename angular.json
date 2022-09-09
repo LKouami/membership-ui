@@ -27,6 +27,10 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "ngrx-store-localstorage"
+           ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
@@ -38,8 +42,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
