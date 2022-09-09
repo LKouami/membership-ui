@@ -1,7 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Member } from 'src/app/shared/models/member';
+import { MembersService } from 'src/app/shared/services/members/members.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import * as memberActions from '../../../store/member/member.action';
 @Component({
   selector: 'app-member-dialog',
   templateUrl: './member-dialog.component.html',
@@ -9,18 +13,26 @@ import { Member } from 'src/app/shared/models/member';
 })
 export class MemberDialogComponent implements OnInit {
   memberForm!: FormGroup;
+  @Output() deleteTask = new EventEmitter<any>();
+  @Output() editTask = new EventEmitter<any>();
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { title: string, content: Member, isEdit: boolean },
-    private dashbordFormBuilder: FormBuilder
-  ) { }
+    public data: {action: string, title: string, content: Member, isEdit: boolean },
+    private dashbordFormBuilder: FormBuilder,
+    private memberService: MembersService,
+    private snackBar: MatSnackBar,
+    private store: Store
+    ) { }
 
   ngOnInit(): void {
     this.initForm();
   }
   initForm() {
-    const content = this.data.content;
+    let content = {} as Member;
+    this.data.isEdit ? content = this.data.content : content = {} as Member;
     this.memberForm = this.dashbordFormBuilder.group({
+      Id: new FormControl(content.Id),
       Firstname: new FormControl(content.Firstname, [Validators.required]),
       Lastname: new FormControl(content.Lastname, [Validators.required]),
       Cni: new FormControl(content.Cni, [Validators.required, Validators.required]),
@@ -39,13 +51,50 @@ export class MemberDialogComponent implements OnInit {
 
     });
   }
+  onSubmit() {
+    console.log(this.memberForm.value);
+    const member = {
+      Id: this.memberForm.value.Id,
+      Firstname: this.memberForm.value.Firstname,
+      Lastname: this.memberForm.value.Lastname,
+      Cni: this.memberForm.value.Cni,
+      NumCard: this.memberForm.value.NumCard,
+      Gender: this.memberForm.value.Gender,
+      Birthdate: this.memberForm.value.Birthdate,
+      BirthPlace: this.memberForm.value.BirthPlace,
+      Occupation: this.memberForm.value.Occupation,
+      Province: this.memberForm.value.Province,
+      SubscriptionType: this.memberForm.value.SubscriptionType,
+      SubscriptionDate: this.memberForm.value.SubscriptionDate,
+      CommuneId: this.memberForm.value.CommuneId,
+      Contact: this.memberForm.value.Contact,
+      MembershipNum: this.memberForm.value.MembershipNum,
+      QrCodeRef: this.memberForm.value.QrCodeRef,
+    };
+    this.store.dispatch(memberActions.createMember({member}));
+    this.memberForm.reset();
+  }
+
+  
+
+  deleteMember() {
+    const id = this.data.content.Id
+    console.log('deleting this member:::', id);
+    this.store.dispatch(memberActions.deleteMember({id}));
+  }
+
+  editMember(member : Member) {
+    console.log('editing this member:::', member);
+    this.store.dispatch(memberActions.editMember({member}));
+  }
+
   getFirstnameErrorMessage() {
     if (this.memberForm.controls['Firstname']!.hasError('required')) {
       return 'Entrez une valeur';
     }
-
     return this.memberForm.controls['Firstname']!.hasError('Firstname') ? 'Firstname incorrect' : '';
   }
+
   getLastnameErrorMessage() {
     if (this.memberForm.controls['Lastname']!.hasError('required')) {
       return 'Entrez une valeur';
@@ -143,5 +192,30 @@ export class MemberDialogComponent implements OnInit {
     return this.memberForm.controls['QrCodeRef']!.hasError('QrCodeRef') ? 'QrCodeRef incorrect' : '';
 
   }
-  
+//   submit() {
+//     if(this.data.action == 'add'){
+//       this.memberService.addMember(this.memberForm.value).subscribe((res) => {
+//         this.memberForm.reset(); 
+//         this.snackBar.open('Membre ajouté avec succès', 'Fermer', {
+//           duration: 2000,
+//         });
+//       }, (error) => {
+//         console.log(error);
+//       });
+//   } else if (this.data.action == 'edit'){
+//     this.memberService.editMember(this.memberForm.value)
+//   } else if (this.data.action == 'delete'){
+//     this.memberService.deleteMember(this.memberForm.value, this.data.content.Id ).subscribe((res) => {
+//       this.memberForm.reset(); 
+//       this.snackBar.open('Membre supprimé avec succès', 'Fermer', {
+//         duration: 2000,
+//       });
+//     }, (error) => {
+//       console.log(error);
+//     });
+//   }
+// }
+
+
+
 }

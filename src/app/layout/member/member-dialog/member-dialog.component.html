@@ -1,7 +1,8 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <form [formGroup]="memberForm" >
 <mat-dialog-content class="mat-typography">
-    <div *ngIf="data.isEdit; else elseBlock">
+    <div *ngIf="(data.isEdit && data.action === 'edit')||( data.action === 'add'); else elseBlock">
+        
         <p>
     <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
@@ -20,6 +21,13 @@
         <mat-label>Cni</mat-label>
         <input matInput formControlName="Cni"  autocomplete="off" placeholder="Placeholder" required>
             <mat-error *ngIf="memberForm.controls['Cni'].invalid">{{getCniErrorMessage()}}</mat-error>
+      </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+        <mat-label>Numero de Carte</mat-label>
+        <input matInput formControlName="NumCard"  autocomplete="off" placeholder="Placeholder" required>
+            <mat-error *ngIf="memberForm.controls['NumCard'].invalid">{{getNumCardErrorMessage()}}</mat-error>
       </mat-form-field>
   </p>
     <p>
@@ -111,6 +119,17 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Annuler</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Valider</button>
+  <div *ngIf="(data.isEdit && data.action === 'edit'); else addBlock">
+    <button mat-button   [disabled]="!memberForm.valid" [mat-dialog-close]="1" (click)="editMember(memberForm.value)" [mat-dialog-close]="true" cdkFocusInitial>Modifier</button>
+  </div>
+  <ng-template #addBlock>
+    <div *ngIf="( data.action === 'add'); else deleteBlock">
+    <button mat-button   [disabled]="!memberForm.valid" [mat-dialog-close]="1" (click)="onSubmit()" [mat-dialog-close]="true" cdkFocusInitial>Ajouter</button>
+    </div>
+  </ng-template>
+  <ng-template #deleteBlock>
+    <button mat-button [mat-dialog-close]="1" (click)="deleteMember()" [mat-dialog-close]="true" cdkFocusInitial>Supprimer</button>
+  </ng-template>
 </mat-dialog-actions>
 </form>
+<!--  -->

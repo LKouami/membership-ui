@@ -1,7 +1,10 @@
+&nbsp;&nbsp;&nbsp;
 <mat-form-field appearance="standard">
   <mat-label>Recherche</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Entrez votre recherche" #input>
 </mat-form-field>
+&nbsp;&nbsp;&nbsp;
+<button mat-raised-button color="primary" (click)="openDialog('add')">Ajouter</button>
 
 <table mat-table
  [dataSource]="dataSource" multiTemplateDataRows

@@ -30,6 +30,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MemberDialogComponent } from './layout/member/member-dialog/member-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { StoreModule } from '@ngrx/store';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import * as memberReducer from './store/member/member.reducer';
+import { MemberEffect } from './store/member/member.effect';
+import { reducers, metaReducers } from './store/app.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +74,14 @@ import { MemberDialogComponent } from './layout/member/member-dialog/member-dial
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
+    // ngrx related imports
+    StoreModule.forRoot(reducers,{metaReducers}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([MemberEffect]),
   ],
   providers: [],
   bootstrap: [AppComponent]

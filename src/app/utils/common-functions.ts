@@ -6,14 +6,22 @@ export class CommonFunctions {
         return Object.keys(enumType).filter(key => isNaN(Number(key)));
     }
 
-    static getDialogConfig(row: any, title: string, isEdit: boolean, width: string ): MatDialogConfig {
+    static getDialogConfig(action: string, title: string, isEdit: boolean, width: string,row?: any ): MatDialogConfig {
+        console.log(action);
+        console.log(isEdit);
         return {
             width: width,
             data: {
                 title: title,
                 content: row,
-                isEdit: isEdit
+                isEdit: isEdit,
+                action: action,
             }
         };
+    }
+
+    static refreshTable(table: any) {
+        table.renderRows();
+        table._updateChangeSubscription();
     }
 }
