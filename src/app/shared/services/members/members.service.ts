@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Member } from '../../models/member';
 import config from 'config';
+import { Member } from '../../models/member';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
+
+  constructor(private http: HttpClient) { }
+
   private baseUrl = config.baseUrl + 'api/v1/Members';
 
-  constructor(private http: HttpClient) {
-
+  getMembers() {
+    console.log("getting members");
+    return this.http.get(`${this.baseUrl}`);
   }
 
-  getAllData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`)
-  }
-  editMember(member: Member): Observable<any> {
-    return this.http.put(`${this.baseUrl}`, member)
-  }
-  addMember(member: Member): Observable<any> {
+  addMember(member: Member) {
     return this.http.post(`${this.baseUrl}`, member)
   }
-  deleteMember(member: Member): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${member.Id}`)
+
+  editMember(member: Member) {
+    return this.http.put(`${this.baseUrl}/${member.Id}`, member)
   }
-  
+
+  deleteMember(memberId: any) {
+    console.log('deleting member:::', memberId);
+    return this.http.delete(`${this.baseUrl}/${memberId}`)
+  }
 }
