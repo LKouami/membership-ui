@@ -81,7 +81,9 @@ import { reducers, metaReducers } from './store/app.state';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([MemberEffect]),
+    EffectsModule.forRoot([MemberEffect, ]),
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
