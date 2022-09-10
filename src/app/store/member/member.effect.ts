@@ -20,10 +20,6 @@ export class MemberEffect {
       exhaustMap(action =>
         this.memberService.getMembers().pipe(
           map(response => {
-            console.log('----------------------------------------------------------------');
-            console.log('response:::', response);    
-            console.log('----------------------------------------------------------------');
-
             return memberActions.getMembersSuccess({response});
           }),
           catchError((error: any) => of(memberActions.getMembersFailure(error))))

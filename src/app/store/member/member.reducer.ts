@@ -36,7 +36,7 @@ const memberReducer = createReducer(
   on(memberActions.createMemberSuccess, (state, result) => {
     const members = undefined !== state.members ? _.cloneDeep(state.members) : [];
     const currentMember = undefined !== state.currentMember ? _.cloneDeep(state.currentMember) : {} as Member;
-    currentMember.Id = result.memberId;
+    currentMember.Id = result.Id;
     members.push(currentMember);
     return {
       members,
@@ -48,10 +48,13 @@ const memberReducer = createReducer(
   // Delete Member Reducers
   on(memberActions.deleteMember, (state, {id}) => ({...state, isLoading: true, deleteMemberId: id})),
   on(memberActions.deleteMemberSuccess, (state, result) => {
-    let members = undefined !== state.members ? _.cloneDeep(state.members) : [];
-    if (result.status) {
-      members = members.filter(member => member.Id !== state.deleteMemberId);
-    }
+    let members = undefined !== state.members ? _.cloneDeep(state.members) : [] as Member[];
+      //delete members[state.deleteMemberId];
+      const index = members.findIndex((member: Member) => {
+       return member.Id === state.deleteMemberId
+      
+      });
+      if (index !== -1) members.splice(index, 1);
     return {
       members,
       isLoading: false,

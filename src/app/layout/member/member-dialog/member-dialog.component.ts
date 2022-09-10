@@ -52,7 +52,6 @@ export class MemberDialogComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.memberForm.value);
     const member = {
       Id: this.memberForm.value.Id,
       Firstname: this.memberForm.value.Firstname,
@@ -79,12 +78,10 @@ export class MemberDialogComponent implements OnInit {
 
   deleteMember() {
     const id = this.data.content.Id
-    console.log('deleting this member:::', id);
     this.store.dispatch(memberActions.deleteMember({id}));
   }
 
   editMember(member : Member) {
-    console.log('editing this member:::', member);
     this.store.dispatch(memberActions.editMember({member}));
   }
 

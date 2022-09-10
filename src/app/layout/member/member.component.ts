@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MemberDialogComponent } from './member-dialog/member-dialog.component';
 import { CommonFunctions } from 'src/app/utils/common-functions';
 import { MatSort } from '@angular/material/sort';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromRoot from '../../store/app.state';
 import { getMembers } from 'src/app/store/member/member.selector';
@@ -35,6 +35,7 @@ export class MemberComponent implements OnInit {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'more_actions', 'expand'];
   expandedElement?: Member | null;
   public member: Member[] = [];
+
   members: any[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -51,14 +52,14 @@ export class MemberComponent implements OnInit {
     //   this.dataSource.data = data.members!
     // });
     this.store.select(getMembers).subscribe(data => {
-      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-      console.log(data);
-      console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
       this.dataSource.data = data.members!
     });
+  //   this.store.select(getMembers)
+  //     .subscribe((data) => this.initializeData(data.members!));
   }
-  destroy$: Subject<boolean> = new Subject<boolean>();
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  
   ngOnInit() {
     console.log('ngOnInit');
     this.store.dispatch(memberAction.getMembers());

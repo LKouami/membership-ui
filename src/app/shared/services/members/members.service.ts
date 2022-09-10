@@ -13,7 +13,6 @@ export class MembersService {
   private baseUrl = config.baseUrl + 'api/v1/Members';
 
   getMembers() {
-    console.log("getting members");
     return this.http.get(`${this.baseUrl}`);
   }
 
@@ -26,7 +25,6 @@ export class MembersService {
   }
 
   deleteMember(memberId: any) {
-    console.log('deleting member:::', memberId);
     return this.http.delete(`${this.baseUrl}/${memberId}`)
   }
 }

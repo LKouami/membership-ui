@@ -52,7 +52,6 @@ export  class DashboardComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });  } else if(action === 'delete') {
       const dialogRef = this.dialog.open(DashboardDialogComponent, {
         width: '300px',
@@ -68,7 +67,6 @@ export  class DashboardComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
       });
     }
   }
