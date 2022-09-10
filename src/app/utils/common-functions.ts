@@ -7,8 +7,6 @@ export class CommonFunctions {
     }
 
     static getDialogConfig(action: string, title: string, isEdit: boolean, width: string,row?: any ): MatDialogConfig {
-        console.log(action);
-        console.log(isEdit);
         return {
             width: width,
             data: {
