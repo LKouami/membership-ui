@@ -7,4 +7,4 @@ export const getPrefectureState = createFeatureSelector<prefectureReducer.State>
 export const getPrefectures = createSelector(
   getPrefectureState,
   prefectureReducer.getPrefectures
-);
+)
