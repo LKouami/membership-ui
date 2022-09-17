@@ -6,6 +6,8 @@ import { MembersService } from 'src/app/shared/services/members/members.service'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import * as memberActions from '../../../store/member/member.action';
+import { Commune } from 'src/app/shared/models/commune';
+import { CommonFunctions } from 'src/app/utils/common-functions';
 @Component({
   selector: 'app-member-dialog',
   templateUrl: './member-dialog.component.html',
@@ -18,7 +20,7 @@ export class MemberDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: {action: string, title: string, content: Member, isEdit: boolean },
+    public data: {action: string, title: string, content: Member, isEdit: boolean, communes: Commune[] },
     private dashbordFormBuilder: FormBuilder,
     private memberService: MembersService,
     private snackBar: MatSnackBar,
@@ -30,7 +32,9 @@ export class MemberDialogComponent implements OnInit {
   }
   initForm() {
     let content = {} as Member;
+    let communes: Commune[] = [];
     this.data.isEdit ? content = this.data.content : content = {} as Member;
+    this.data.isEdit ? communes = this.data.communes  : communes = [] as Commune[];
     this.memberForm = this.dashbordFormBuilder.group({
       Id: new FormControl(content.Id),
       Firstname: new FormControl(content.Firstname, [Validators.required]),
@@ -44,7 +48,7 @@ export class MemberDialogComponent implements OnInit {
       Province: new FormControl(content.Province, [Validators.required]),
       SubscriptionType: new FormControl(content.SubscriptionType, [Validators.required]),
       SubscriptionDate: new FormControl(content.SubscriptionDate, [Validators.required]),
-      CommuneId: new FormControl(content.CommuneId, [Validators.required]),
+      CommuneId: new FormControl(CommonFunctions.getElementById(communes, content.CommuneId)?.Id, [Validators.required]),
       Contact: new FormControl(content.Contact, [Validators.required]),
       MembershipNum: new FormControl(content.MembershipNum, [Validators.required]),
       QrCodeRef: new FormControl(content.QrCodeRef, [Validators.required]),

@@ -39,6 +39,7 @@ export const getThisState = (stateName: any) => {
     try{
         if(undefined != reducerkeys && reducerkeys.length > 0){
             reducerkeys.forEach((key: any) => {
+                console.log(key);
                 localStorage.setItem(key,'');
             })
         }

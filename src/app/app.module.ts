@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { RegionComponent } from './layout/region/region.component';
-import { CommuneComponent } from './layout/commune/commune.component';
-import { PrefectureComponent } from './layout/prefecture/prefecture.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentComponent } from './layout/content/content.component';
 import { PresentationComponent } from './layout/presentation/presentation.component';
@@ -38,19 +36,32 @@ import { EffectsModule } from '@ngrx/effects';
 import * as memberReducer from './store/member/member.reducer';
 import { MemberEffect } from './store/member/member.effect';
 import { reducers, metaReducers } from './store/app.state';
+import { RegionDialogComponent } from './layout/region/region-dialog/region-dialog.component';
+import { RegionEffect } from './store/region/region.effect';
+import { CommuneComponent } from './layout/commune/commune.component';
+import { CommuneDialogComponent } from './layout/commune/commune-dialog/commune-dialog.component';
+import { CommuneEffect } from './store/commune/commune.effect';
+import { PrefectureEffect } from './store/prefecture/prefecture.effect';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { PrefectureComponent } from './layout/prefecture/prefecture.component';
+import { PrefectureDialogComponent } from './layout/prefecture/prefecture-dialog/prefecture-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RegionComponent,
-    CommuneComponent,
-    PrefectureComponent,
     SidebarComponent,
     ContentComponent,
     PresentationComponent,
     MemberComponent,
     DashboardComponent,
     DashboardDialogComponent,
-    MemberDialogComponent
+    MemberDialogComponent,
+    RegionComponent,
+    RegionDialogComponent,
+    CommuneComponent,
+    CommuneDialogComponent,
+    PrefectureComponent,
+    PrefectureDialogComponent
     ],
   imports: [
     BrowserModule,
@@ -75,13 +86,15 @@ import { reducers, metaReducers } from './store/app.state';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatOptionModule,
+    MatSelectModule,
     // ngrx related imports
     StoreModule.forRoot(reducers,{metaReducers}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([MemberEffect, ]),
+    EffectsModule.forRoot([MemberEffect, RegionEffect,CommuneEffect,PrefectureEffect]),
   ],
   providers: [],
   bootstrap: [AppComponent]

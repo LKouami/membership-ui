@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegionComponent } from './region.component';
+import { RegionDialogComponent } from './region-dialog.component';
 
-describe('RegionComponent', () => {
-  let component: RegionComponent;
-  let fixture: ComponentFixture<RegionComponent>;
+describe('RegionDialogComponent', () => {
+  let component: RegionDialogComponent;
+  let fixture: ComponentFixture<RegionDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegionComponent ]
+      declarations: [ RegionDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegionComponent);
+    fixture = TestBed.createComponent(RegionDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

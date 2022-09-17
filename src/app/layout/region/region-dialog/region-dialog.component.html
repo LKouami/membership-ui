@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<form [formGroup]="regionForm" >
+<mat-dialog-content class="mat-typography">
+    <div *ngIf="(data.isEdit && data.action === 'edit')||( data.action === 'add'); else elseBlock">
+        
+        <p>
+    <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="Name"  autocomplete="off" placeholder="Placeholder">
+        <mat-error *ngIf="regionForm.controls['Name'].invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+  </p>
+    
+
+
+
+
+
+
+    </div>
+    <ng-template #elseBlock>Confirmez la suppression</ng-template>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <div *ngIf="(data.isEdit && data.action === 'edit'); else addBlock">
+    <button mat-button   [disabled]="!regionForm.valid" [mat-dialog-close]="1" (click)="editRegion(regionForm.value)" [mat-dialog-close]="true" cdkFocusInitial>Modifier</button>
+  </div>
+  <ng-template #addBlock>
+    <div *ngIf="( data.action === 'add'); else deleteBlock">
+    <button mat-button   [disabled]="!regionForm.valid" [mat-dialog-close]="1" (click)="onSubmit()" [mat-dialog-close]="true" cdkFocusInitial>Ajouter</button>
+    </div>
+  </ng-template>
+  <ng-template #deleteBlock>
+    <button mat-button [mat-dialog-close]="1" (click)="deleteRegion()" [mat-dialog-close]="true" cdkFocusInitial>Supprimer</button>
+  </ng-template>
+</mat-dialog-actions>
+</form>
+<!--  -->

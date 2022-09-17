@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContentComponent } from './layout/content/content.component';
 import { MemberComponent } from './layout/member/member.component';
 import { CommuneComponent } from './layout/commune/commune.component';
-import { PrefectureComponent } from './layout/prefecture/prefecture.component';
+// import { PrefectureComponent } from './layout/prefecture/prefecture.component';
 import { RegionComponent } from './layout/region/region.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
+import { PrefectureComponent } from './layout/prefecture/prefecture.component';
 const routes: Routes = [
   {
     path:'app',
