@@ -37,12 +37,16 @@
             <mat-error *ngIf="memberForm.controls['Occupation'].invalid">{{getOccupationErrorMessage()}}</mat-error>
         </mat-form-field>
       </p>
-    <p>
+      <p>
         <mat-form-field appearance="outline">
             <mat-label>Commune</mat-label>
-            <input matInput formControlName="CommuneId"  autocomplete="off" placeholder="Placeholder">
+            <mat-select formControlName="CommuneId" placeholder="Placeholder">
+              <mat-option *ngFor="let commune of data.communes" [value]="commune.Id">
+                {{commune.Name}}
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="memberForm.controls['CommuneId'].invalid">{{getCommuneIdErrorMessage()}}</mat-error>
-        </mat-form-field>
+          </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">

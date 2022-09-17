@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MembersService } from 'src/app/shared/services/members/members.service';
-import { Component, ViewChild, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Member } from 'src/app/shared/models/member';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,13 +7,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MemberDialogComponent } from './member-dialog/member-dialog.component';
 import { CommonFunctions } from 'src/app/utils/common-functions';
 import { MatSort } from '@angular/material/sort';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import * as fromRoot from '../../store/app.state';
+import { Store } from '@ngrx/store';
 import { getMembers } from 'src/app/store/member/member.selector';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as memberAction from '../../store/member/member.action';
+import * as communeAction from '../../store/commune/commune.action';
+import { Commune } from 'src/app/shared/models/commune';
+import { getCommunes } from 'src/app/store/commune/commune.selector';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-member',
@@ -35,36 +35,41 @@ export class MemberComponent implements OnInit {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'more_actions', 'expand'];
   expandedElement?: Member | null;
   public member: Member[] = [];
+  public members: any[] = [];
+  communes: Commune[]= [];
 
-  members: any[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
     public dialog: MatDialog,
-    private store: Store
+    private store: Store,
+    private snackBar: MatSnackBar,
   ) { 
-    // this.store.select(getMembers).pipe(
-    //   takeUntil(this.destroy$)
-    // ).subscribe(data => {
-    //   console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-    //   console.log(data);
-    //   console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-    //   this.dataSource.data = data.members!
-    // });
     this.store.select(getMembers).subscribe(data => {
+      this.members = data.members!;
       this.dataSource.data = data.members!
     });
-  //   this.store.select(getMembers)
-  //     .subscribe((data) => this.initializeData(data.members!));
+    this.store.select(getCommunes).subscribe(data => {
+      this.communes = data.communes!
+      this.dataSource.data = this.members;
+    });
+
   }
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   
   ngOnInit() {
-    console.log('ngOnInit');
     this.store.dispatch(memberAction.getMembers());
-    // this.dataSource.data = this.member;
+    this.store.dispatch(communeAction.getCommunes());
+
   }
+
+  getCommune(Id: string) {
+    return CommonFunctions.getElementById(this.communes, Id);
+   }
+   getCommuneName(Id: string) {
+     return this.getCommune(Id).Name;
+   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -74,16 +79,26 @@ export class MemberComponent implements OnInit {
   openDialog(action: string, row?: Member) {
     if (action === 'edit') {
       const dialogRef = this.dialog.open(MemberDialogComponent,
-        CommonFunctions.getDialogConfig(action, 'Modifier membre', true, '300px', row))
+        CommonFunctions.getDialogConfig(action, 'Modifier membre', true, '300px', row, undefined,undefined,this.communes)).afterClosed().subscribe(result => {
+          if (result) {
+          CommonFunctions.openSnackBar('Membre modifié avec succès', 3, this.snackBar);
+          }
+        });
      }
     else if (action === 'delete') {
       const dialogRef = this.dialog.open(MemberDialogComponent,
-        CommonFunctions.getDialogConfig(action, 'Supprimer membre', false, '300px', row));
-        
-
+        CommonFunctions.getDialogConfig(action, 'Supprimer membre', false, '300px', row)).afterClosed().subscribe(result => {
+          if (result) {
+          CommonFunctions.openSnackBar('Membre supprimé avec succès', 3, this.snackBar);
+          }
+        });
     } else if (action === 'add') {
       const dialogRef = this.dialog.open(MemberDialogComponent,
-        CommonFunctions.getDialogConfig(action, 'Ajouter membre', false, '300px'));
+        CommonFunctions.getDialogConfig(action, 'Ajouter membre', false, '300px', undefined, undefined,undefined,this.communes)).afterClosed().subscribe(result => {
+          if (result) {
+          CommonFunctions.openSnackBar('Membre ajouté avec succès', 3, this.snackBar);
+          }
+        });
       
     }
   }
